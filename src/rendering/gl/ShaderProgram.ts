@@ -1,4 +1,4 @@
-import {vec4, mat4} from 'gl-matrix';
+import {vec3, vec4, mat4} from 'gl-matrix';
 import Drawable from './Drawable';
 import {gl} from '../../globals';
 
@@ -28,7 +28,14 @@ class ShaderProgram {
   unifModel: WebGLUniformLocation;
   unifModelInvTr: WebGLUniformLocation;
   unifViewProj: WebGLUniformLocation;
+  unifCameraPos: WebGLUniformLocation;
   unifColor: WebGLUniformLocation;
+  unifLayer1Color: WebGLUniformLocation;
+  unifLayer2Color: WebGLUniformLocation;
+  unifLayer3Color: WebGLUniformLocation;
+  unifTime: WebGLUniformLocation;
+  unifNoiseAmp: WebGLUniformLocation;
+  unifNoiseSpeedModifier: WebGLUniformLocation;
 
   constructor(shaders: Array<Shader>) {
     this.prog = gl.createProgram();
@@ -48,6 +55,13 @@ class ShaderProgram {
     this.unifModelInvTr = gl.getUniformLocation(this.prog, "u_ModelInvTr");
     this.unifViewProj   = gl.getUniformLocation(this.prog, "u_ViewProj");
     this.unifColor      = gl.getUniformLocation(this.prog, "u_Color");
+    this.unifLayer1Color = gl.getUniformLocation(this.prog, "u_Layer1Color");
+    this.unifLayer2Color = gl.getUniformLocation(this.prog, "u_Layer2Color");
+    this.unifLayer3Color = gl.getUniformLocation(this.prog, "u_Layer3Color");
+    this.unifCameraPos = gl.getUniformLocation(this.prog, "u_CameraPos");
+    this.unifTime = gl.getUniformLocation(this.prog, "u_Time");
+    this.unifNoiseAmp = gl.getUniformLocation(this.prog, "u_NoiseAmp");
+    this.unifNoiseSpeedModifier = gl.getUniformLocation(this.prog, "u_NoiseSpeedModifier");
   }
 
   use() {
@@ -82,6 +96,54 @@ class ShaderProgram {
     this.use();
     if (this.unifColor !== -1) {
       gl.uniform4fv(this.unifColor, color);
+    }
+  }
+
+  setOut1Color(color: vec4) {
+    this.use();
+    if (this.unifLayer1Color !== null) {
+      gl.uniform4fv(this.unifLayer1Color, color);
+    }
+  }
+
+  setOut2Color(color: vec4) {
+    this.use();
+    if (this.unifLayer2Color !== null) {
+      gl.uniform4fv(this.unifLayer2Color, color);
+    }
+  }
+  
+  setOut3Color(color: vec4) {
+    this.use();
+    if (this.unifLayer3Color !== null) {
+      gl.uniform4fv(this.unifLayer3Color, color);
+    }
+  }
+
+
+  setTime(time: number) {
+    this.use();
+  
+    if (this.unifTime !== null) {
+      gl.uniform1f(this.unifTime, time);
+    }
+  }
+
+  setNoiseModifiers(amplitude: number, speed: number) {
+    this.use();
+    if (this.unifNoiseAmp !== null) {
+      gl.uniform1f(this.unifNoiseAmp, amplitude);
+    }
+    if (this.unifNoiseSpeedModifier !== null) {
+      gl.uniform1f(this.unifNoiseSpeedModifier, speed);
+    }
+  }
+
+  setCameraPosition(position: vec3) {
+    this.use();
+  
+    if (this.unifCameraPos !== null) {
+      gl.uniform3fv(this.unifCameraPos, position);
     }
   }
 

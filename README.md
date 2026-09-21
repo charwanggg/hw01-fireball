@@ -1,5 +1,20 @@
 # HW 1: WebGL Fireball
 
+Charlie Wang
+
+Created a fireball.
+Hold SPACE to IGNITE the fireball.
+Extinguish Mode to reverse controls.
+
+![](ignited.png)
+
+![](extinguished.png)
+
+Fireball as hot and cold settings.
+
+![](coldmode.png)
+
+
 <p align="center">
   <img width="360" height="360" src="fireball.png">
 </p>

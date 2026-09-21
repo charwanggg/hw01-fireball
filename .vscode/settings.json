@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "*.glsl": "glsl"
+  },
+  "glsllint.glslangValidatorPath": "C:\\Users\\chenh\\AppData\\Local\\Programs\\glslang\\bin\\glslangValidator.exe",
+  "glsllint.additionalStageAssociations": {
+    "lambert-vert": "vert",
+    "lambert-frag": "frag"
+  }
+}
